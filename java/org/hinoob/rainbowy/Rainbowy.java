@@ -11,16 +11,21 @@ public class Rainbowy extends JavaPlugin {
     private static Rainbowy INSTANCE;
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         INSTANCE = this;
 
         PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
         PacketEvents.getAPI().getSettings().debug(true);
         PacketEvents.getAPI().load();
-
+    }
+    
+    @Override
+    public void onEnable() {
+        PacketEvents.getAPI().init();
         registerListeners();
 
         getLogger().info("Enabled");
+
     }
 
     @Override
